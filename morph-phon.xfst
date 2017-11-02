@@ -153,8 +153,8 @@ define NumericInsSilentP [..] -> %^sBRV %^sVC || %0^{12,14} ./. %@tSep  _ %@RB
                      .o. [..] -> %^sBUV %^sVC || 9 %0      _ %@RB
                      .o. [..] -> %^sBUV %^sVC || %0        _ %@RB
                      .o. [..] -> %^sFUV %^sVC || 1         _ %@RB
-                     .o. [..] -> %^sFUV       || 2         _ %@RB
-                     .o. [..] -> %^sFRV %^sUC || [3|4]     _ %@RB
+                     .o. [..] -> %^sFUV       || [2|½]     _ %@RB
+                     .o. [..] -> %^sFRV %^sUC || [3|4|¼|¾] _ %@RB
                      .o. [..] -> %^sFUV %^sUC || 5         _ %@RB
                      .o. [..] -> %^sBUV       || 6         _ %@RB
                      .o. [..] -> %^sFUV       || 7         _ %@RB
@@ -260,6 +260,13 @@ define DeleteLAR  l %^A r -> 0 || Boundary _ Boundary+ l %^A r
 
 
 !
+! `n' deletion in derivation -InC
+! this happesn after the stems einding with `n'
+!
+
+define DeleteN  %^%(I%) n %^c  -> %^c || n Boundary+ _ %@MB ;
+
+!
 ! `n' insertion after (s) / larI (y) -> (n)
 !
 ! After (s)I and larI -DA -DAn become -nDA -nDAn, (y)A becomes nA
@@ -270,7 +277,7 @@ define InsertN  %^D %^A   -> n %^D %^A,
                 %^%(y%) %^A  -> n %^A,
                 %^%(y%) %^I -> n %^I ,
                 %^C %^A  -> n %^C %^A
-                || [ [%^%(s%)|s] %^I 
+                || Boundary [ [%^%(s%)|s] %^I 
                     | Boundary [ l %^A r %^I | k i | k ü]
                    ] [Boundary|AposSym]+ _ %@MB,
                    .#. {aynı} %@RB %@MB _;
@@ -635,13 +642,15 @@ define VoicingAssimilation  [ %^D (->) t ,
 define VoicingAssimilation  [ %^D -> t , 
 #endif
 #if (RELAXED_C_ASSIMILATION == 1)
-                              %^C (->) ç  
+                              %^C (->) ç,
 #else
-                              %^C -> ç  
+                              %^C -> ç,
 #endif
+                              %^G -> k  
                              || ConsUV [ IntSym | AposSym]* _ ]
                        .o.  [ %^D -> d,
-                              %^C -> c ];
+                              %^C -> c,
+                              %^G -> g ];
 
 !
 ! Reduplication of some root final consonants (gemination)

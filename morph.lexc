@@ -207,7 +207,7 @@ LEXICON insPostP
 
 LEXICON insPostPadjKi
 %<Postp%:adj%:insC%>:@RB    AdjCont;
-                        insPostPKi;
+%<Postp%:adj%:insC%>:@RB    Ki;
 
 !
 ! these require a complement with either -lI or -sIz
@@ -371,7 +371,9 @@ LEXICON HepPrn
 !
 LEXICON Onom
 %<Onom%>:@RB        OnomCont;
+#if (ALLOW_MREDUP == 1)
 %<Onom%:mredup%>:@MREDUP@RB    OnomCont;
+#endif
 
 LEXICON  OnomCont
                     #;
@@ -385,7 +387,9 @@ LEXICON  OnomCont
 
 LEXICON Interjection
 %<Ij%>:@RB      InterjectionCont;
+#if (ALLOW_MREDUP == 1)
 %<Ij%:mredup%>:@MREDUP@RB    InterjectionCont;
+#endif
 
 LEXICON InterjectionCont
                   #;
@@ -479,14 +483,18 @@ LEXICON EndQuoteCont
 
 LEXICON NPcomp  ! this is only for lexicalized forms with compounding
 @NCOMP%<N%:prop%>:^(s)^I@NCOMP@RB NPcont;
+#if (ALLOW_MREDUP == 1)
 @NCOMP%<N%:prop%:mredup%>:^(s)^I@NCOMP@MREDUP@RB NPcont;
+#endif
 
 LEXICON NPPart
 %<N%:prop%:partial%>:@RB   NPcont;
 
 LEXICON NP
 %<N%:prop%>:@RB   NPcont;
+#if (ALLOW_MREDUP == 1)
 %<N%:prop%:mredup%>:@MREDUP@RB    NPcont;
+#endif
 
 LEXICON NP_typo
 #if (MARK_TYPOS == 1) 
@@ -523,7 +531,9 @@ LEXICON   NPAposCont
 
 LEXICON NPnation
 %<N%:prop%>:@RB   NPnationCont;
+#if (ALLOW_MREDUP == 1)
 %<N%:prop%:mredup%>:@MREDUP@RB    NPnationCont;
+#endif
 
 LEXICON NPnationCont
                 NPcont;
@@ -531,7 +541,9 @@ LEXICON NPnationCont
 
 LEXICON NPperson
 %<N%:prop%>:@RB   NPpersonCont;
+#if (ALLOW_MREDUP == 1)
 %<N%:prop%:mredup%>:@MREDUP@RB    NPpersonCont;
+#endif
 
 LEXICON NPpersonCont
                 NPcont;
@@ -544,7 +556,9 @@ LEXICON NPpersonCont
 
 LEXICON Ncomp ! this is only for lexicalized forms with compounding
 @NCOMP%<N%>:^(s)^I@NCOMP@RB NcompCont;
+#if (ALLOW_MREDUP == 1)
 @NCOMP%<N%:mredup%>:^(s)^I@NCOMP@MREDUP@RB NcompCont;
+#endif
 
 LEXICON NcompInfl  ! this is for regular nouns
 %<ncomp%>:^(s)^I@NCOMP@MB    NcompCont;
@@ -581,9 +595,11 @@ LEXICON Ninfl
 
 LEXICON Nfamily
 %<N%>:@RB   Ncont;
-%<N%::mredup%>:@MREDUP@RB    Ncont;
 %<N%>:@RB   NfamCont;
+#if (ALLOW_MREDUP == 1)
+%<N%::mredup%>:@MREDUP@RB    Ncont;
 %<N%::mredup%>:@MREDUP@RB    NfamCont;
+#endif
 
 LEXICON NfamCont
 %<p1s%>:^(I)m@MB      NfamPosCont;
@@ -622,7 +638,9 @@ LEXICON NAbbrCont
 
 LEXICON N
 %<N%>:@RB       Ncont;
+#if (ALLOW_MREDUP == 1)
 %<N%:mredup%>:@MREDUP@RB    Ncont;
+#endif
 
 LEXICON N_typo
 #if (MARK_TYPOS == 1) 
@@ -731,27 +749,50 @@ LEXICON Ki
 !
 
 LEXICON NomPredicatePLU
+#if (ZERO_DERIV == 1)
 %<%0%>%<V%>:@MB                 NomPredPagr;
 %<%0%>%<V%>:@MB                 NomPredPagr3s;
 %<%0%>%<V%>:@MB                 NomPredDir;
 %<%0%>%<V%>:@MB                 CplAll;
 %<%0%>%<V%>:@MB                 #;
+#else
+                                NomPredPagr;
+                                NomPredPagr3s;
+                                NomPredDir;
+                                CplAll;
+                                #;
+#endif
                                        NomPredQ;
                                       CliticSA;
 
 LEXICON NomPredicate
+#if (ZERO_DERIV == 1)
 %<%0%>%<V%>:@MB                       NomPredPagr3p;
+#else
+                                      NomPredPagr3p;
+#endif
                                       NomPredicatePLU;
 
 LEXICON NomPredicateMAK
+#if (ZERO_DERIV == 1)
 %<%0%>%<V%>:@MB                        NomPredPagr3s;
 %<%0%>%<V%>:@MB                        NomPredPagr3p;
 %<%0%>%<V%>:@MB                        NomPredDir;
 %<%0%>%<V%>:@MB                        CplAll;
+#else
+                                       NomPredPagr3s;
+                                       NomPredPagr3p;
+                                       NomPredDir;
+                                       CplAll;
+#endif
                                        NomPredQ;
 
 LEXICON NomPredQ
+#if (ZERO_DERIV == 1)
 %<%0%>%<V%>:@MB                         NomPredQCont;
+#else
+                                        NomPredQCont;
+#endif
 
 LEXICON NomPredQCont
 #if (PREDICATE_WITHOUT_PAGR == 1)
@@ -764,12 +805,18 @@ LEXICON NomPredQCont
 LEXICON NomPredPagr
 %<cpl%:pres%>%<1s%>:^(y)^NS^Im@MB       NomPredPagrCont;
 %<cpl%:pres%>%<2s%>:s^NS^In@MB          NomPredPagrCont;
-%<cpl%:pres%>%<3s%>:0@MB             NomPredPagrCont;
 %<cpl%:pres%>%<1p%>:^(y)^NS^Iz@MB       NomPredPagrCont;
 %<cpl%:pres%>%<2p%>:s^NS^In^Iz@MB       NomPredPagrCont;
+                                        NomPredPagr3s;
 
 LEXICON NomPredPagr3s
+#if (ZERO_COPULA == 1)
 %<cpl%:pres%>%<3s%>:0@MB             NomPredPagrCont;
+#else
+                    #;
+                    CVcesine;
+                    DIrEnd;
+#endif
 
 LEXICON NomPredPagrCont
                     #;
@@ -808,7 +855,9 @@ LEXICON DIrEnd
 
 LEXICON Adj
 %<Adj%>:@RB        AdjCont;
+#if (ALLOW_MREDUP == 1)
 %<Adj%:mredup%>:@MREDUP@RB    AdjCont;
+#endif
 
 LEXICON Adj_typo
 #if (MARK_TYPOS == 1) 
@@ -838,7 +887,9 @@ LEXICON AdvHep
 
 LEXICON Adv
 %<Adv%>:@RB         AdvCont;
+#if (ALLOW_MREDUP == 1)
 %<Adv%:mredup%>:@MREDUP@RB    AdvCont;
+#endif
 
 
 LEXICON Adv_typo
@@ -857,19 +908,27 @@ LEXICON AdvPart
                   
 LEXICON QAdv
 %<Adv%:qst%>:@RB  AdvCont;
+#if (ALLOW_MREDUP == 1)
 %<Adv%:mredup%:qst%>:@MREFUP@RB  AdvCont;
+#endif
 
 LEXICON QAdj
 %<Adj%:qst%>:@RB  AdjCont;
+#if (ALLOW_MREDUP == 1)
 %<Adj%:mredup%:qst%>:@MREFUP@RB  AdjCont;
+#endif
 
 LEXICON AdvTime
 %<Adv%>:@RB         AdvTimeCont;
+#if (ALLOW_MREDUP == 1)
 %<Adv%:mredup%>:@MREFUP@RB  AdvTimeCont;
+#endif
 
 LEXICON QAdvTime
 %<Adv%:qst%>:@RB    AdvTimeCont;
+#if (ALLOW_MREDUP == 1)
 %<Adv%:mredup%:qst%>:@MREFUP@RB  AdvCont;
+#endif
 
 LEXICON AdvTimeCont
                     Ki;
@@ -1063,7 +1122,9 @@ LEXICON DateTimeCont
 
 LEXICON NumStem
 %<Num%>:@RB  NumCont;
+#if (ALLOW_MREDUP == 1)
 %<Num%:mredup%>:@MREDUP@RB  NumCont;
+#endif
 
 LEXICON Num_typo
 #if (MARK_TYPOS == 1) 
@@ -1155,7 +1216,9 @@ LEXICON NumDistCont
 
 LEXICON V
 %<V%>:@RB   VCont;
+#if (ALLOW_MREDUP == 1)
 %<V%:mredup%>:@MREDUP@RB   VCont;
+#endif
 
 LEXICON VPartLast
 %<V%:partial%>:@RB   VCont;
@@ -1194,7 +1257,9 @@ LEXICON VNoCausNoAorCont
 
 LEXICON V_Rcp
 %<V%>:@RB   VRcpCont;
+#if (ALLOW_MREDUP == 1)
 %<V%:mredup%>:@MREDUP@RB   VRcpCont;
+#endif
 
 LEXICON   VRcpCont
                     VCont;
@@ -1207,7 +1272,9 @@ LEXICON VRcp
 
 LEXICON V_Rfl
 %<V%>:@RB   VRflCont;
+#if (ALLOW_MREDUP == 1)
 %<V%:mredup%>:@MREDUP@RB   VRflCont;
+#endif
 
 LEXICON   VRflCont
                     VCont;
@@ -1228,7 +1295,9 @@ LEXICON  VRflRcpCont
 
 LEXICON V_CausDir
 %<V%>:@RB           VCausDirCont;
+#if (ALLOW_MREDUP == 1)
 %<V%:mredup%>:@MREDUP@RB   VCausDirCont;
+#endif
 
 LEXICON VCausDirCont
                     VCausDir;
@@ -1241,7 +1310,9 @@ LEXICON VCausDir
 !
 LEXICON V_CausIr
 %<V%>:@RB           VCausIrCont;
+#if (ALLOW_MREDUP == 1)
 %<V%:mredup%>:@MREDUP@RB   VCausIrCont;
+#endif
 
 LEXICON VCausIrCont
                     VCausIr;
@@ -1254,7 +1325,9 @@ LEXICON VCausIr
 !
 LEXICON V_CausIt
 %<V%>:@RB           VCausItCont;
+#if (ALLOW_MREDUP == 1)
 %<V%:mredup%>:@MREDUP@RB   VCausItCont;
+#endif
 
 LEXICON VCausItCont
                     VCausIt;
@@ -1267,7 +1340,9 @@ LEXICON VCausIt
 !
 LEXICON V_Rcp_CausDir
 %<V%>:@RB           VRcpCausDirCont;
+#if (ALLOW_MREDUP == 1)
 %<V%:mredup%>:@MREDUP@RB   VRcpCausDirCont;
+#endif
 
 LEXICON VRcpCausDirCont
                     VRcp;
@@ -1291,7 +1366,9 @@ LEXICON VRcpCausDirCont
 
 LEXICON V_CausIrreg
 %<V%>:@RB           VCausIrregCont;
+#if (ALLOW_MREDUP == 1)
 %<V%:mredup%>:@MREDUP@RB   VCausIrregCont;
+#endif
 
 LEXICON VCausIrregCont
                   VNoCausCont;
@@ -1307,7 +1384,9 @@ LEXICON VCausIrregCont
 
 LEXICON V_Rfl_Rcp_CausIrreg
 %<V%>:@RB           VRflRcpCausIrregCont;
+#if (ALLOW_MREDUP == 1)
 %<V%:mredup%>:@MREDUP@RB   VRflRcpCausIrregCont;
+#endif
 
 LEXICON VRflRcpCausIrregCont
                  VRfl;
@@ -1317,7 +1396,9 @@ LEXICON VRflRcpCausIrregCont
 
 LEXICON V_AorAr
 %<V%>:@RB           VAorArCont;
+#if (ALLOW_MREDUP == 1)
 %<V%:mredup%>:@MREDUP@RB   VAorArCont;
+#endif
 
 LEXICON VAorArCont
             VAorAr;
@@ -1332,10 +1413,14 @@ LEXICON   AorArCont
                     CVcesinePagr;
                     VerbalAdj;
                     AbilPartial;
+!                    DerivNCont;
+!                    DerivJCont;
 
 LEXICON V_Rcp_AorAr
 %<V%>:@RB           VRcpAorArCont;
+#if (ALLOW_MREDUP == 1)
 %<V%:mredup%>:@MREDUP@RB   VRcpAorArCont;
+#endif
 
 LEXICON  VRcpAorArCont
             VAorAr;
@@ -1345,7 +1430,9 @@ LEXICON  VRcpAorArCont
 
 LEXICON V_Rfl_AorAr
 %<V%>:@RB           VRflAorArCont;
+#if (ALLOW_MREDUP == 1)
 %<V%:mredup%>:@MREDUP@RB   VRflAorArCont;
+#endif
 
 
 LEXICON  VRflAorArCont
@@ -1356,7 +1443,9 @@ LEXICON  VRflAorArCont
 
 LEXICON  V_Rfl_Rcp_AorAr
 %<V%>:@RB           VRflRcpAorArCont;
+#if (ALLOW_MREDUP == 1)
 %<V%:mredup%>:@MREDUP@RB   VRflRcpAorArCont;
+#endif
 
 
 LEXICON  VRflRcpAorArCont
@@ -1368,7 +1457,9 @@ LEXICON  VRflRcpAorArCont
 
 LEXICON V_CausDir_AorAr
 %<V%>:@RB           VCausDirAorArCont;
+#if (ALLOW_MREDUP == 1)
 %<V%:mredup%>:@MREDUP@RB   VCausDirAorArCont;
+#endif
 
 LEXICON VCausDirAorArCont
                         VAorAr;
@@ -1378,7 +1469,9 @@ LEXICON VCausDirAorArCont
 
 LEXICON V_CausIr_AorAr
 %<V%>:@RB           VCausIrAorArCont;
+#if (ALLOW_MREDUP == 1)
 %<V%:mredup%>:@MREDUP@RB   VCausIrAorArCont;
+#endif
 
 LEXICON VCausIrAorArCont
                         VAorAr;
@@ -1388,7 +1481,9 @@ LEXICON VCausIrAorArCont
 
 LEXICON V_CausAt_AorAr
 %<V%>:@RB           VCausAtAorArCont;
+#if (ALLOW_MREDUP == 1)
 %<V%:mredup%>:@MREDUP@RB   VCausAtAorArCont;
+#endif
 
 LEXICON VCausAtAorArCont
                         VAorAr;
@@ -1401,7 +1496,9 @@ LEXICON VCausAt
 
 LEXICON V_Rcp_CausAr_AorAr
 %<V%>:@RB           VRcpCausArAorArCont;
+#if (ALLOW_MREDUP == 1)
 %<V%:mredup%>:@MREDUP@RB   VRcpCausArAorArCont;
+#endif
 
 LEXICON VRcpCausArAorArCont
                         VRcp;
@@ -1412,7 +1509,9 @@ LEXICON VRcpCausArAorArCont
 
 LEXICON V_Rcp_CausIr_AorAr
 %<V%>:@RB                   VRcpAorArCausIrCont;
+#if (ALLOW_MREDUP == 1)
 %<V%:mredup%>:@MREDUP@RB    VRcpAorArCausIrCont;
+#endif
 
 LEXICON VRcpAorArCausIrCont
             VAorAr;
@@ -1425,7 +1524,9 @@ LEXICON VRcpAorArCausIrCont
 !
 LEXICON V_CausAr_AorAr
 %<V%>:@RB           VCausArAorArCont;
+#if (ALLOW_MREDUP == 1)
 %<V%:mredup%>:@MREDUP@RB   VCausArAorArCont;
+#endif
 
 
 LEXICON VCausArAorArCont
@@ -1440,7 +1541,9 @@ LEXICON VCausAr
 !
 LEXICON V_CausArt_AorAr
 %<V%>:@RB           VCausArtAorArCont;
+#if (ALLOW_MREDUP == 1)
 %<V%:mredup%>:@MREDUP@RB   VCausArtAorArCont;
+#endif
 
 LEXICON VCausArtAorArCont
                         VAorAr;
@@ -1454,7 +1557,9 @@ LEXICON VCausArt
 !
 LEXICON V_CausIt_AorAr
 %<V%>:@RB           VCausItAorArCont;
+#if (ALLOW_MREDUP == 1)
 %<V%:mredup%>:@MREDUP@RB   VCausItAorArCont;
+#endif
 
 LEXICON VCausItAorArCont
                         VAorAr;
@@ -1465,7 +1570,9 @@ LEXICON VCausItAorArCont
 !
 LEXICON V_Rcp_CausDir_AorAr
 %<V%>:@RB           VRcpCausDirAorArCont;
+#if (ALLOW_MREDUP == 1)
 %<V%:mredup%>:@MREDUP@RB   VRcpCausDirAorArCont;
+#endif
 
 LEXICON VRcpCausDirAorArCont
                         VAorAr;
@@ -1476,7 +1583,9 @@ LEXICON VRcpCausDirAorArCont
 
 LEXICON V_Rfl_CausDir_AorAr
 %<V%>:@RB           VRflCausDirAorArCont;
+#if (ALLOW_MREDUP == 1)
 %<V%:mredup%>:@MREDUP@RB   VRflCausDirAorArCont;
+#endif
 
 LEXICON VRflCausDirAorArCont
                         VAorAr;
@@ -1487,7 +1596,9 @@ LEXICON VRflCausDirAorArCont
 
 LEXICON V_Rfl_Rcp_CausDir_AorAr
 %<V%>:@RB           VRflRcpCausDirAorArCont;
+#if (ALLOW_MREDUP == 1)
 %<V%:mredup%>:@MREDUP@RB   VRflRcpCausDirAorArCont;
+#endif
 
 
 LEXICON VRflRcpCausDirAorArCont
@@ -1500,7 +1611,9 @@ LEXICON VRflRcpCausDirAorArCont
 
 LEXICON V_CausIrreg_AorAr
 %<V%>:@RB           VCausIrregAorArCont;
+#if (ALLOW_MREDUP == 1)
 %<V%:mredup%>:@MREDUP@RB   VCausIrregAorArCont;
+#endif
 
 LEXICON VCausIrregAorArCont
                         VAorAr;
@@ -1509,11 +1622,15 @@ LEXICON VCausIrregAorArCont
 
 LEXICON V_Rcp_CausIrreg_AorAr
 %<V%>:@RB           VRcpCausIrregAorArCont;
+#if (ALLOW_MREDUP == 1)
 %<V%:mredup%>:@MREDUP@RB   VRcpCausIrregAorArCont;
+#endif
 
 LEXICON V_Rfl_CausIrreg_AorAr
 %<V%>:@RB           VRflCausIrregAorArCont;
+#if (ALLOW_MREDUP == 1)
 %<V%:mredup%>:@MREDUP@RB   VRflCausIrregAorArCont;
+#endif
 
 LEXICON VRflCausIrregAorArCont
                         VRfl;
@@ -1639,6 +1756,8 @@ LEXICON AorCont
             TAMg1Cont;  ! TODO/CHECK: not allow -DIr: okurdur ??
             CVcesinePagr;
             VerbalAdj;
+!            DerivNCont;
+!            DerivJCont;
 
 LEXICON TAMFutCont
             TAMg1Cont;
@@ -1681,7 +1800,11 @@ LEXICON TAMg1Cont
 ! above on -makta -yor).
 !
 LEXICON VerbalAdj
+#if (ZERO_DERIV == 1)
 %<%0%>%<Adj%>:@MB       AdjCont;
+#else
+                        AdjCont;
+#endif
 
 
 LEXICON TAMG1QCont
@@ -2246,6 +2369,7 @@ LEXICON  Sym
 
 LEXICON Mderiv
         MN_zero;
+        ND_lIk;
 
 LEXICON Nderiv
             D_lI;
@@ -2265,6 +2389,10 @@ LEXICON Nderiv
             D_si;
             D_mtrak;
 !            D_gil; ! this works only in special cases.
+!            D_inc;  ! ilgi-nç - any other?
+!            D_al;
+!            D_ik;
+!            D_em;
 
 LEXICON Pderiv
             D_lI;
@@ -2278,6 +2406,8 @@ LEXICON Pderiv
 LEXICON Jderiv
             JD_lIk;
             D_lI;
+            D_CI;
+            D_sAl;
 #if (ANALYZE_lA == 1)
             D_lA;
 #endif
@@ -2290,6 +2420,7 @@ LEXICON Jderiv
             D_mtrak;
 
 LEXICON Aderiv
+            D_sIz;
             AD_lIk;
             AD_CA;
             AN_zero;
@@ -2298,8 +2429,18 @@ LEXICON Aderiv
 LEXICON Vderiv
             D_yIcI;
             D_yIS;
-!            D_mA;
             D_yAsI;
+!            D_mA;
+!
+!            D_inc;
+!            D_ik;
+!            D_ek;
+!            D_ey;
+!            D_ev;
+!            D_gin;
+!            D_gi;
+!            D_em;
+!            D_im;
 
 LEXICON Oderiv
             D_lA;
@@ -2367,7 +2508,7 @@ LEXICON   AD_lIk
 !
 !
 LEXICON   D_arasi
-%<arasi%>:arası            DerivJCont;
+%<arasi%>:arası@MB            DerivJCont;
 
 ! -(I)mtrak mainly attaches adjectives relating to colors and
 ! tastes, but it may also attach to other adjectives an nouns.
@@ -2377,24 +2518,24 @@ LEXICON   D_arasi
 !       film-trak, sağlam-trak
 
 LEXICON D_mtrak
-%<imtrak%>:^(I)mtrak              DerivJCont;
+%<imtrak%>:^(I)mtrak@MB              DerivJCont;
 
 ! -(I)msI also makes adjectives from nouns and adjectives.
 !           mavi-msi, tatlı-msı, gül-ümsü
 !
 LEXICON   D_imsi
-%<imsi%>:^(I)ms^I     DerivJCont;
+%<imsi%>:^(I)ms^I@MB     DerivJCont;
 
 ! -sI also makes adjectives from nouns.
 !           ot-su, sümük-sü, kadın-sı etc.
 ! This seems to be used only with nouns ending with a consononant.
 !
 LEXICON   D_si
-%<si%>:s^I     DerivJCont;
+%<si%>:s^I@MB     DerivJCont;
 
 !
 LEXICON   D_imsi
-%<imsi%>:^(I)ms^I     DerivJCont;
+%<imsi%>:^(I)ms^I@MB     DerivJCont;
 
 ! Dimunitive suffixes.
 !
@@ -2473,7 +2614,7 @@ LEXICON CliticSA
 !   TODO/CHECK: these may all be lexicalized.
 !
 LEXICON D_yIcI
-%<yici%>:^(y)^Ic^I      DerivJCont;
+%<yici%>:^(y)^Ic^I@MB      DerivJCont;
 
 ! -CIl makes adjectives from nouns
 !       N->J insancıl,
@@ -2484,7 +2625,7 @@ LEXICON D_yIcI
 !  N->N 
 
 LEXICON D_CIl
-%<cil%>:^C^Il              DerivJCont;
+%<cil%>:^C^Il@MB              DerivJCont;
 
 
 ! -gil makes nouns from nouns. 
@@ -2494,7 +2635,7 @@ LEXICON D_CIl
 !      al be lexicalized.
 !
 LEXICON D_gil
-%<gil%>:gil       DerivNCont;
+%<gil%>:gil@MB       DerivNCont;
 
 ! -DIr  makes adverbial phrases from quantified nouns specifying time 
 !       üç gündür, bir zamandır ....
@@ -2502,7 +2643,7 @@ LEXICON D_gil
 ! TODO: tag is the same as other <dir>
 !
 LEXICON D_dir
-%<dir%>:^D^NS^Ir      DerivACont;
+%<dir%>:^D^NS^Ir@MB      DerivACont;
 
 
 ! -lArI makes adverbs from time adverbials `akşamları', `hafta
@@ -2513,7 +2654,7 @@ LEXICON D_dir
 ! slightly different than the ones that combines with -ki
 !
 LEXICON D_lArI
-%<leri%>:l^Ar^I      DerivACont;
+%<leri%>:l^Ar^I@MB      DerivACont;
 
 
 ! -lIğInA is another suffix that attaches to the time expressions. It
@@ -2533,16 +2674,16 @@ LEXICON D_lIGInA
 !LEXICON ND_lA
 !%<la%>:l^A       DerivVCont;
 LEXICON D_lA
-%<la%>:l^A       DerivVCont;
+%<la%>:l^A@MB       DerivVCont;
 
 ! -lAn makes verbs from nouns and adjectives
 !
 !       N->V: av-lan, N->J: kuru-lan
 !
 LEXICON ND_lAn
-%<lan%>:l^An       DerivVCont;
+%<lan%>:l^An@MB       DerivVCont;
 LEXICON JD_lAn
-%<lan%>:l^An       DerivVCont;
+%<lan%>:l^An@MB       DerivVCont;
 
 ! -lAş makes verbs from nouns and adjectives
 !
@@ -2550,9 +2691,9 @@ LEXICON JD_lAn
 !
 !   TODO/CHECK: these may all be lexicalized verbs
 LEXICON ND_lAS
-%<las%>:l^Aş       DerivVCont;
+%<las%>:l^Aş@MB       DerivVCont;
 LEXICON JD_lAS
-%<las%>:l^Aş       DerivVCont;
+%<las%>:l^Aş@MB       DerivVCont;
 
 ! -(y)Iş makes nouns from verbs
 !       yürüyüş, duruş, bakış
@@ -2560,7 +2701,7 @@ LEXICON JD_lAS
 !   TODO: these probably are also lexicalized
 !
 LEXICON D_yIS
-%<yis%>:^(y)^Iş   DerivNCont;
+%<yis%>:^(y)^Iş@MB   DerivNCont;
 
 ! -mA makes nouns and adjectives from verbs
 !    V->N: ödeme, arama, kıyma, kesme
@@ -2568,22 +2709,114 @@ LEXICON D_yIS
 ! these probably are also lexicalized, and this creates a lot of
 ! ambiguity (-mA is also a subordinating suffix). So it's out.
 !
-!LEXICON D_mA
-!%<ma%>:m^A   DerivNCont;
-!%<ma%>:m^A   DerivJCont;
+! LEXICON D_mA
+! %<ma%>:m^A@MB   DerivNCont;
+! %<ma%>:m^A@MB   DerivJCont;
+
+
+! non-productive derivation -(I)nC
+! V -> N: bas-ınç
+! V -> J: kıskan-ç
+! N -> J: ilgi-nç
+! For stems ending with 'n', the form is '-C', we let them pass here
+! and drop In after a a stem ending with 'n'
+! TODO: öd(e)-ünç?
+!
+! LEXICON D_inc
+! %<inc%>:^(I)n^c@MB   DerivNCont;
+! %<inc%>:^(I)n^c@MB   DerivJCont;
+
+! non-productive(?) derivation -(I)K
+! V -> N: kay-ık
+! V -> J: sol-uk
+! N -> N/J: orta-k
+!
+! LEXICON D_ik
+! %<ik%>:^(I)^k@MB   DerivNCont;
+! %<ik%>:^(I)^k@MB   DerivJCont;
+
+! non-productive derivation -(A)K
+! V -> N: kay-ak
+! V -> J: kork-ak
+!
+! seems to be realted to -(I)K above, but the distinction is not
+! clearcut
+!
+! LEXICON D_ek
+! %<ek%>:^(A)^k@MB   DerivNCont;
+! %<ek%>:^(A)^k@MB   DerivJCont;
+
+! non-productive derivation -(A)y
+! V -> N: den-ey
+! V -> J: düş-ey
+!
+! LEXICON D_ey
+! %<ey%>:^(A)y@MB   DerivNCont;
+! %<ey%>:^(A)y@MB   DerivJCont;
+
+! non-productive derivation -(A)v
+! V -> N: gör-ev
+!
+! LEXICON D_ev
+! %<ev%>:^(A)v@MB   DerivNCont;
+
+! non-productive derivation -GIn
+! V -> N: bas-kın, sür-gün
+! V -> J: yor-gun, şaş-kın
+!
+! LEXICON D_gin
+! %<gin%>:^G^In@MB   DerivNCont;
+! %<gin%>:^G^In@MB   DerivJCont;
+
+! non-productive derivation -GI
+! V -> N: sil-gi, sev-gi
+!
+! LEXICON D_gi
+! %<gi%>:^G^I@MB   DerivNCont;
+
+! non-productive derivation -(A)m
+! V -> N: kur-am, tut-am, dön-em
+! N -> N: ön-em
+!
+! LEXICON D_em
+! %<em%>:^(A)m@MB   DerivNCont;
+
+! non-productive derivation -(I)m/-(y)Im
+! V -> N: dene-yim, bak-ım, anla-m, bil-im
+!
+! TODO/CHECK: this seems to also attach passive or reflexive forms
+! (geri-l-im)
+!
+! LEXICON D_im
+! %<im%>:^(I)m@MB   DerivNCont;
+! %<yim%>:^(y)^Im@MB   DerivNCont;
 
 ! -sAl makes adjectives from nouns
 !       bilimsel, tarihsel, duşsel...
 !
 LEXICON D_sAl
-%<sal%>:s^Al  DerivJCont;
+%<sal%>:s^Al@MB  DerivJCont;
+
+! -Al is similar to -sAl
+!       yasal, yerel, cinsel, ilkel...
+!
+! LEXICON D_al
+! %<al%>:^Al@MB  DerivJCont;
 
 
 LEXICON JN_zero
+#if (ZERO_DERIV == 1)
 %<%0%>%<N%>:@MB   Ncont;
+#else
+                  Ncont;
+#endif
 
 LEXICON AN_zero
+#if (ZERO_DERIV == 1)
 %<%0%>%<N%>:@MB   Ncont;
+#else
+                  Ncont;
+#endif
 
 ! This may be a way for avoiding duplicated adj/adv entries int he
 ! lexicon
@@ -2591,7 +2824,11 @@ LEXICON AN_zero
 !%<%0%>%<Adj%>:@MB   AdjCont;
 
 LEXICON MN_zero
+#if (ZERO_DERIV == 1)
 %<%0%>%<N%>:@MB   Ncont;
+#else
+                  Ncont;
+#endif
 
 !
 !
